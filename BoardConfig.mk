@@ -113,6 +113,9 @@ TARGET_ENABLE_MEDIADRM_64 := true
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
+# Exclude serif fonts for saving system.img size.
+EXCLUDE_SERIF_FONTS := true
+
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(LOCAL_PATH)/config.fs
 TARGET_KERNEL_HAVE_EXFAT := true
