@@ -1,3 +1,4 @@
+
 # Copyright (c) 2009-2012, 2014, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -246,9 +247,6 @@ on enable-low-power
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/camera-daemon/cpus 4-7
 
-    setprop ro.min_freq_0 200000
-    setprop ro.min_freq_4 200000
-
     # change GPU initial power level from 400Mhz(level 2) to 220MHz(level 3)
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 3
 
@@ -389,6 +387,13 @@ service charger /charger
     class charger
     critical
 
+service perfd /system/vendor/bin/perfd
+    class main
+    user root
+    group root readproc system
+    disabled
+    writepid /dev/cpuset/system-background/tasks
+
 service msm_irqbalance /system/vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core
     user root
@@ -409,6 +414,10 @@ service qcom-sh /system/vendor/bin/init.qcom.sh
 service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
+    disabled
+    oneshot
+
+service qcom-mem /system/vendor/bin/init.qcom.mem.sh
     disabled
     oneshot
 
@@ -454,10 +463,6 @@ on property:sys.boot_completed=1
 on property:init.svc.surfaceflinger=restarting
     stop hwcomposer-2-1
     start hwcomposer-2-1
-
-service qcom-mem /system/vendor/bin/init.qcom.mem.sh
-    disabled
-    oneshot
 
 on property:apexd.status=ready
     mount none /system/etc/swcodec/ld.config.txt /apex/com.android.media.swcodec/etc/ld.config.txt bind

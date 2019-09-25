@@ -271,6 +271,12 @@ case "$target" in
                 # enable dynamic clock gating
                 echo 1 > /sys/module/lpm_levels/lpm_workarounds/dynamic_clock_gating
             fi
+
+            setprop vendor.post_boot.parsed 1
+
+            # start perfd
+            rm /data/system/perfd/default_values
+            start perfd
             ;;
         esac
     ;;
