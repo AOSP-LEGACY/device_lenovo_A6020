@@ -18,6 +18,9 @@
 # Inherit from the proprietary version
 $(call inherit-product, vendor/lenovo/A6020/A6020-vendor.mk)
 
+# Common Android Go configurations
+$(call inherit-product, build/target/product/go_defaults.mk)
+
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += device/lenovo/A6020/overlay
 
