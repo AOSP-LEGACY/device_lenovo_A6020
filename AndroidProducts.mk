@@ -15,9 +15,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_A6020.mk
+    $(LOCAL_DIR)/magma_A6020.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_A6020-userdebug \
-    aosp_A6020-eng \
-    aosp_A6020-user
+    magma_A6020-userdebug \
+    magma_A6020-eng \
+    magma_A6020-user
